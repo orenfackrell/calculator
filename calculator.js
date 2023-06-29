@@ -21,14 +21,21 @@ const division = function(a, b) {
 	return a / b;
 };
 
-function operate(operator, a, b){
-    if(operator === add.textContent){
-        addition(a, b);
-    } else if(operator === subtract.textContent){
-        subtract(a, b);
-    } else if(operator == multiply.textContent){
-        multiplication(a, b);
+function operate(a,operator, b){
+    if(operator === '+'){
+        return addition(a, b);
+    } else if(operator === '-'){
+        return subtraction(a, b);
+    } else if(operator === 'x'){
+        return multiplication(a, b);
+    } else if(operator === '÷'){
+        return division(a, b);
     } else {
-        division(a, b);
+        return null;
     }
 };
+
+console.log(operate(5, '+', 10))
+console.log(operate(5, '-', 10))
+console.log(operate(5, 'x', 10))
+console.log(operate(5, '÷', 10))
