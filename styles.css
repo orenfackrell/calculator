@@ -36,11 +36,11 @@ body{
 }
 
 .output,
-.runningTotal {
+.previousOutput {
     margin: 1vh 3vh;
 }
 
-.runningTotal {
+.previousOutput {
     font-size: medium;
 }
 
@@ -66,10 +66,7 @@ button:hover{
     cursor: pointer;
 }
 
-.divide,
-.multiply,
-.subtract,
-.add,
+.operator,
 .equals {
     background-color: rgb(246, 153, 6);
 }
