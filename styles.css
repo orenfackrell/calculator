@@ -25,6 +25,8 @@ body{
 }
 
 .display {
+    display: flex;
+    justify-content: space-between;
     background-color: rgb(49, 49, 49);
     color: white;
     text-align: right;
@@ -67,11 +69,14 @@ button:hover{
 .divide,
 .multiply,
 .subtract,
-.addition,
+.add,
 .equals {
     background-color: rgb(246, 153, 6);
 }
 
+.clear {
+    background-color: rgb(170, 41, 67);
+}
 .footer {
     color: white;
     align-items: end;
