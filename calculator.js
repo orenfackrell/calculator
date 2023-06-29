@@ -1,6 +1,7 @@
 const operators = document.querySelectorAll('.operator');
 const clear = document.querySelector('.clear');
 const equals = document.querySelector('.equals'); 
+const decimal = document.querySelector('.decimal');
 
 const addition = function(a, b) {
 	return a + b;
@@ -77,11 +78,21 @@ backspace.addEventListener('click', () => {
     output.textContent = output.textContent.slice(0, -1);
 });
 
+decimal.addEventListener('click', () => {
+    if (!output.textContent.includes('.')) {
+      output.textContent += '.';
+    }
+  });
+
 equals.addEventListener('click', () => {
     previousOutput.textContent = `${output.textContent} =`;
   
     const calculation = output.textContent.split(' ');
-    output.textContent = operate(...calculation);
+    const result = operate(...calculation);
+
+    const roundedResult = parseFloat(result.toFixed(10)).toString();
+    // this will take a number and round from 10 decimal places and then return all the values before repeating 0's
+    output.textContent = roundedResult;
   
     if (output.textContent === 'ERROR!') {
       alert("Use 'AC' or refresh the browser to re-try, don't divide by 0");
