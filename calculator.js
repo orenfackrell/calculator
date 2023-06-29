@@ -1,7 +1,4 @@
-const add = document.querySelector('.addition');
-const subtract = document.querySelector('.subtract'); 
-const multiply = document.querySelector('.multiply');
-const divide = document.querySelector('.divide'); 
+const operators = document.querySelectorAll('.operator');
 const clear = document.querySelector('.clear');
 const equals = document.querySelector('.equals'); 
 
@@ -18,22 +15,31 @@ const multiplication = function(a, b) {
 };
 
 const division = function(a, b) {
-	return a / b;
+	if (b === 0){
+        return "ERROR!"
+    } else return a / b;
 };
 
-function operate(a, operator, b){
-    if(operator === '+'){
-        return addition(a, b);
-    } else if(operator === '-'){
-        return subtraction(a, b);
-    } else if(operator === 'x'){
-        return multiplication(a, b);
-    } else if(operator === '÷'){
-        return division(a, b);
-    } else {
-        return null;
+function operate(...operands) {
+    let result = parseFloat(operands[0]);
+  
+    for (let i = 1; i < operands.length; i += 2) {
+      const operator = operands[i];
+      const nextOperand = parseFloat(operands[i + 1]);
+  
+      if (operator === '+') {
+        result = addition(result, nextOperand);
+      } else if (operator === '-') {
+        result = subtraction(result, nextOperand);
+      } else if (operator === 'x') {
+        result = multiplication(result, nextOperand);
+      } else if (operator === '÷') {
+        result = division(result, nextOperand);
+      }
     }
-};
+  
+    return result;
+  }
 
 console.log(operate(5, '+', 10));
 console.log(operate(5, '-', 10));
@@ -42,7 +48,6 @@ console.log(operate(5, '÷', 10));
 
 let buttons = document.querySelectorAll('button')
 let number = document.querySelectorAll('.number');
-let operators =  document.querySelectorAll('.operator');
 let output = document.querySelector('.output');
 let previousOutput = document.querySelector('.previousOutput');
 let backspace = document.querySelector('.backspace');
@@ -70,22 +75,18 @@ operators.forEach(button => button.addEventListener('click', () =>{
 
 backspace.addEventListener('click', () => {
     output.textContent = output.textContent.slice(0, -1);
-})
+});
 
 equals.addEventListener('click', () => {
-
     previousOutput.textContent = `${output.textContent} =`;
+  
+    const calculation = output.textContent.split(' ');
+    output.textContent = operate(...calculation);
+  
+    if (output.textContent === 'ERROR!') {
+      alert("Use 'AC' or refresh the browser to re-try, don't divide by 0");
+    }
+  });
+};
 
-    calcStorage = output.textContent.split(' ');
-
-    console.log(calcStorage)
-
-    let a = parseFloat(calcStorage[0]);
-    let operator = calcStorage[1];
-    let b = parseFloat(calcStorage[2]);
-
-    output.textContent = operate(a, operator, b)
-});
-}
-
-constructCalculation()
+constructCalculation();
