@@ -38,6 +38,7 @@ body{
 .output,
 .previousOutput {
     margin: 1vh 3vh;
+    min-height: 1rem;
 }
 
 .previousOutput {
