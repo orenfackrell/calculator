@@ -58,7 +58,7 @@ class Calculator {
   removeLastCharacter() {
     this.output.textContent = this.output.textContent.slice(0, -1);
   }
-  
+
   appendDecimal() {
     const lastNumber = this.output.textContent.split(/[\+\-\x\÷]/).pop();
     if (!lastNumber.includes('.')) {
@@ -80,25 +80,44 @@ class Calculator {
     }
   }
 
-  operate(...operands) {
-    let result = parseFloat(operands[0]);
-
-    for (let i = 1; i < operands.length; i += 2) {
-      const operator = operands[i];
-      const nextOperand = parseFloat(operands[i + 1]);
-
-      if (operator === '+') {
-        result = this.addition(result, nextOperand);
-      } else if (operator === '-') {
-        result = this.subtraction(result, nextOperand);
-      } else if (operator === 'x') {
-        result = this.multiplication(result, nextOperand);
-      } else if (operator === '÷') {
-        result = this.division(result, nextOperand);
+  operate() {
+    let calculation = this.output.textContent.split(' ');
+  
+    // Handle multiplication and division first
+    calculation = this.handleMultiplicationAndDivision(calculation);
+  
+    // Then handle addition and subtraction
+    calculation = this.handleAdditionAndSubtraction(calculation);
+  
+    this.output.textContent = calculation[0];
+  }
+  
+  handleMultiplicationAndDivision(calculation) {
+    for (let i = 0; i < calculation.length; i++) {
+      if (calculation[i] === 'x' || calculation[i] === '÷') {
+        const result = calculation[i] === 'x' ?
+          this.multiplication(parseFloat(calculation[i - 1]), parseFloat(calculation[i + 1])) :
+          this.division(parseFloat(calculation[i - 1]), parseFloat(calculation[i + 1]));
+  
+        calculation.splice(i - 1, 3, result);
+        i--;
       }
     }
-
-    return result;
+    return calculation;
+  }
+  
+  handleAdditionAndSubtraction(calculation) {
+    for (let i = 0; i < calculation.length; i++) {
+      if (calculation[i] === '+' || calculation[i] === '-') {
+        const result = calculation[i] === '+' ?
+          this.addition(parseFloat(calculation[i - 1]), parseFloat(calculation[i + 1])) :
+          this.subtraction(parseFloat(calculation[i - 1]), parseFloat(calculation[i + 1]));
+  
+        calculation.splice(i - 1, 3, result);
+        i--;
+      }
+    }
+    return calculation;
   }
 
   addition(a, b) {
