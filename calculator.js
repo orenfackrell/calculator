@@ -1,103 +1,125 @@
-const operators = document.querySelectorAll('.operator');
-const clear = document.querySelector('.clear');
-const equals = document.querySelector('.equals'); 
-const decimal = document.querySelector('.decimal');
+class Calculator {
+  constructor() {
+    this.output = document.querySelector('.output');
+    this.previousOutput = document.querySelector('.previousOutput');
+    this.clear = document.querySelector('.clear');
+    this.equals = document.querySelector('.equals');
+    this.decimal = document.querySelector('.decimal');
+    this.operators = document.querySelectorAll('.operator');
+    this.numberButtons = document.querySelectorAll('.number');
+    this.backspace = document.querySelector('.backspace');
+    this.calcStorage = [];
+    this.addEventListeners();
+  }
 
-const addition = function(a, b) {
-	return a + b;
-};
+  addEventListeners() {
+    this.clear.addEventListener('click', () => {
+      this.clearOutput();
+    });
 
-const subtraction = function(a, b) {
-	return a - b;
-};
+    this.numberButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        this.appendNumber(button.textContent);
+      });
+    });
 
-const multiplication = function(a, b) {
-	return a * b;
-};
+    this.operators.forEach(button => {
+      button.addEventListener('click', () => {
+        this.appendOperator(button.textContent);
+      });
+    });
 
-const division = function(a, b) {
-	if (b === 0){
-        return "ERROR!"
-    } else return a / b;
-};
+    this.backspace.addEventListener('click', () => {
+      this.removeLastCharacter();
+    });
 
-function operate(...operands) {
+    this.decimal.addEventListener('click', () => {
+      this.appendDecimal();
+    });
+
+    this.equals.addEventListener('click', () => {
+      this.calculate();
+    });
+  }
+
+  clearOutput() {
+    this.output.textContent = null;
+    this.previousOutput.textContent = null;
+  }
+
+  appendNumber(number) {
+    this.output.textContent += number;
+  }
+
+  appendOperator(operator) {
+    this.output.textContent += ` ${operator} `;
+  }
+
+  removeLastCharacter() {
+    this.output.textContent = this.output.textContent.slice(0, -1);
+  }
+
+  appendDecimal() {
+    const lastNumber = this.output.textContent.split(/[\+\-\x\÷]/).pop();
+    if (!lastNumber.includes('.')) {
+      this.output.textContent += '.';
+    }
+  }
+
+  calculate() {
+    this.previousOutput.textContent = `${this.output.textContent} =`;
+
+    const calculation = this.output.textContent.split(' ');
+    const result = this.operate(...calculation);
+
+    const roundedResult = parseFloat(result.toFixed(10)).toString();
+    this.output.textContent = roundedResult;
+
+    if (this.output.textContent === 'ERROR!') {
+      alert("Use 'AC' or refresh the browser to re-try, don't divide by 0");
+    }
+  }
+
+  operate(...operands) {
     let result = parseFloat(operands[0]);
-  
+
     for (let i = 1; i < operands.length; i += 2) {
       const operator = operands[i];
       const nextOperand = parseFloat(operands[i + 1]);
-  
+
       if (operator === '+') {
-        result = addition(result, nextOperand);
+        result = this.addition(result, nextOperand);
       } else if (operator === '-') {
-        result = subtraction(result, nextOperand);
+        result = this.subtraction(result, nextOperand);
       } else if (operator === 'x') {
-        result = multiplication(result, nextOperand);
+        result = this.multiplication(result, nextOperand);
       } else if (operator === '÷') {
-        result = division(result, nextOperand);
+        result = this.division(result, nextOperand);
       }
     }
-  
+
     return result;
   }
 
-console.log(operate(5, '+', 10));
-console.log(operate(5, '-', 10));
-console.log(operate(5, 'x', 10));
-console.log(operate(5, '÷', 10));
+  addition(a, b) {
+    return a + b;
+  }
 
-let buttons = document.querySelectorAll('button')
-let number = document.querySelectorAll('.number');
-let output = document.querySelector('.output');
-let previousOutput = document.querySelector('.previousOutput');
-let backspace = document.querySelector('.backspace');
+  subtraction(a, b) {
+    return a - b;
+  }
 
+  multiplication(a, b) {
+    return a * b;
+  }
 
-
-function constructCalculation(){
-let calcStorage = [];
-
-clear.addEventListener('click', () =>{
-    output.textContent = null;
-    previousOutput.textContent = null;
-
-})
-
-number.forEach(button => button.addEventListener('click', () =>{ 
-    let number = button.textContent;
-    output.textContent += `${number}`;
-}));
-
-operators.forEach(button => button.addEventListener('click', () =>{     
-    let operators = button.textContent;
-    output.textContent += ` ${operators} `;
-}));
-
-backspace.addEventListener('click', () => {
-    output.textContent = output.textContent.slice(0, -1);
-});
-
-decimal.addEventListener('click', () => {
-    if (!output.textContent.includes('.')) {
-      output.textContent += '.';
+  division(a, b) {
+    if (b === 0) {
+      return "ERROR!";
+    } else {
+      return a / b;
     }
-  });
+  }
+}
 
-equals.addEventListener('click', () => {
-    previousOutput.textContent = `${output.textContent} =`;
-  
-    const calculation = output.textContent.split(' ');
-    const result = operate(...calculation);
-
-    const roundedResult = parseFloat(result.toFixed(10)).toString();
-    // this will take a number and round from 10 decimal places and then return all the values before repeating 0's
-    output.textContent = roundedResult;
-  
-    if (output.textContent === 'ERROR!') {
-      alert("Use 'AC' or refresh the browser to re-try, don't divide by 0");
-    }
-  });
-};
-
-constructCalculation();
+const calculator = new Calculator();
