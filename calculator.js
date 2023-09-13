@@ -58,7 +58,7 @@ class Calculator {
   removeLastCharacter() {
     this.output.textContent = this.output.textContent.slice(0, -1);
   }
-
+  
   appendDecimal() {
     const lastNumber = this.output.textContent.split(/[\+\-\x\÷]/).pop();
     if (!lastNumber.includes('.')) {
