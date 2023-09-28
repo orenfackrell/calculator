@@ -16,3 +16,75 @@ export function division(a, b) {
   }
   return a / b;
 }
+
+const output = document.querySelector('.output');
+const previousOutput = document.querySelector('.previousOutput');
+
+export function operate() {
+  let calculation = output.textContent.split(' ');
+
+  // Handle multiplication and division first
+  calculation = handleMultiplicationAndDivision(calculation);
+
+  // Then handle addition and subtraction
+  calculation = handleAdditionAndSubtraction(calculation);
+
+  [output.textContent] = calculation;
+}
+
+// BIDMAS logic
+export function handleMultiplicationAndDivision(calculation) {
+  for (let i = 0; i < calculation.length; i = +1) {
+    if (calculation[i] === 'x' || calculation[i] === '÷') {
+      const result =
+        calculation[i] === 'x'
+          ? this.multiplication(
+              parseFloat(calculation[i - 1]),
+              parseFloat(calculation[i + 1]),
+            )
+          : this.division(
+              parseFloat(calculation[i - 1]),
+              parseFloat(calculation[i + 1]),
+            );
+
+      calculation.splice(i - 1, 3, result);
+      i = -1;
+    }
+  }
+  return calculation;
+}
+
+export function handleAdditionAndSubtraction(calculation) {
+  for (let i = 0; i < calculation.length; i = +1) {
+    if (calculation[i] === '+' || calculation[i] === '-') {
+      const result =
+        calculation[i] === '+'
+          ? this.addition(
+              parseFloat(calculation[i - 1]),
+              parseFloat(calculation[i + 1]),
+            )
+          : this.subtraction(
+              parseFloat(calculation[i - 1]),
+              parseFloat(calculation[i + 1]),
+            );
+
+      calculation.splice(i - 1, 3, result);
+      i = -1;
+    }
+  }
+  return calculation;
+}
+
+export function calculate() {
+  previousOutput.textContent = `${output.textContent} =`;
+
+  const calculation = output.textContent.split(' ');
+  const result = operate(...calculation);
+
+  const roundedResult = parseFloat(result.toFixed(10)).toString();
+  output.textContent = roundedResult;
+
+  if (output.textContent === 'ERROR!') {
+    alert("Use 'AC' or refresh the browser to re-try, don't divide by 0");
+  }
+}
