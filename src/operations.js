@@ -17,32 +17,17 @@ export function division(a, b) {
   return a / b;
 }
 
-const output = document.querySelector('.output');
-const previousOutput = document.querySelector('.previousOutput');
-
-export function operate() {
-  let calculation = output.textContent.split(' ');
-
-  // Handle multiplication and division first
-  calculation = handleMultiplicationAndDivision(calculation);
-
-  // Then handle addition and subtraction
-  calculation = handleAdditionAndSubtraction(calculation);
-
-  [output.textContent] = calculation;
-}
-
-// BIDMAS logic
+// 'BIDMAS' logic
 export function handleMultiplicationAndDivision(calculation) {
   for (let i = 0; i < calculation.length; i = +1) {
     if (calculation[i] === 'x' || calculation[i] === '÷') {
       const result =
         calculation[i] === 'x'
-          ? this.multiplication(
+          ? multiplication(
               parseFloat(calculation[i - 1]),
               parseFloat(calculation[i + 1]),
             )
-          : this.division(
+          : division(
               parseFloat(calculation[i - 1]),
               parseFloat(calculation[i + 1]),
             );
@@ -59,11 +44,11 @@ export function handleAdditionAndSubtraction(calculation) {
     if (calculation[i] === '+' || calculation[i] === '-') {
       const result =
         calculation[i] === '+'
-          ? this.addition(
+          ? addition(
               parseFloat(calculation[i - 1]),
               parseFloat(calculation[i + 1]),
             )
-          : this.subtraction(
+          : subtraction(
               parseFloat(calculation[i - 1]),
               parseFloat(calculation[i + 1]),
             );
@@ -73,6 +58,21 @@ export function handleAdditionAndSubtraction(calculation) {
     }
   }
   return calculation;
+}
+
+const output = document.querySelector('.output');
+const previousOutput = document.querySelector('.previousOutput');
+
+export function operate() {
+  let calculation = output.textContent.split(' ');
+
+  // Handle multiplication and division first
+  calculation = handleMultiplicationAndDivision(calculation);
+
+  // Then handle addition and subtraction
+  calculation = handleAdditionAndSubtraction(calculation);
+
+  [output.textContent] = calculation;
 }
 
 export function calculate() {

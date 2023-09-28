@@ -8,39 +8,45 @@ import {
 
 import { calculate } from './operations';
 
-const clear = document.querySelector('.clear');
-const equals = document.querySelector('.equals');
-const decimal = document.querySelector('.decimal');
-const operators = document.querySelectorAll('.operator');
-const numberButtons = document.querySelectorAll('.number');
-const backspace = document.querySelector('.backspace');
-
-function addEventListeners() {
+function addEventListeners(
+  clear,
+  numberButtons,
+  operators,
+  backspace,
+  decimal,
+  equals,
+) {
   clear.addEventListener('click', () => {
+    console.log('clear');
     clearOutput();
   });
 
   numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
+      console.log('number');
       appendNumber(button.textContent);
     });
   });
 
   operators.forEach((button) => {
     button.addEventListener('click', () => {
+      console.log('operator');
       appendOperator(button.textContent);
     });
   });
 
   backspace.addEventListener('click', () => {
+    console.log('backspace');
     removeLastCharacter();
   });
 
   decimal.addEventListener('click', () => {
+    console.log('decimal');
     appendDecimal();
   });
 
   equals.addEventListener('click', () => {
+    console.log('equals');
     calculate();
   });
 }
