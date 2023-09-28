@@ -9,8 +9,6 @@
 
 import addEventListeners from './eventListeners';
 
-const output = document.querySelector('.output');
-const previousOutput = document.querySelector('.previousOutput');
 const clear = document.querySelector('.clear');
 const equals = document.querySelector('.equals');
 const decimal = document.querySelector('.decimal');

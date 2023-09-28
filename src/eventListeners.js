@@ -17,36 +17,30 @@ function addEventListeners(
   equals,
 ) {
   clear.addEventListener('click', () => {
-    console.log('clear');
     clearOutput();
   });
 
   numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      console.log('number');
       appendNumber(button.textContent);
     });
   });
 
   operators.forEach((button) => {
     button.addEventListener('click', () => {
-      console.log('operator');
       appendOperator(button.textContent);
     });
   });
 
   backspace.addEventListener('click', () => {
-    console.log('backspace');
     removeLastCharacter();
   });
 
   decimal.addEventListener('click', () => {
-    console.log('decimal');
     appendDecimal();
   });
 
   equals.addEventListener('click', () => {
-    console.log('equals');
     calculate();
   });
 }

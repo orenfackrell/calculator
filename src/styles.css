@@ -1,95 +1,95 @@
-*{
-    font-family: 'Kanit', Courier, monospace;
+* {
+  font-family: 'Kanit', Courier, monospace;
 }
 
-body{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .flexWrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(114, 114, 114);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(114, 114, 114);
 }
 
 .calculator {
-    display: flex;
-    flex-direction: column;
-    margin: 10vh;
-    padding: 2vh;
-    background-color: black;
-    font-size: x-large;
-    border-radius: 5px;
-    border: 4px solid rgb(66, 66, 66);
-    min-width: 60vh;
+  display: flex;
+  flex-direction: column;
+  margin: 10vh;
+  padding: 2vh;
+  background-color: black;
+  font-size: x-large;
+  border-radius: 5px;
+  border: 4px solid rgb(66, 66, 66);
+  min-width: 60vh;
 }
 
 .display {
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    background-color: rgb(49, 49, 49);
-    color: white;
-    border-radius: 5px;
-    border: 4px solid rgb(66, 66, 66);
-    margin: 2vh;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  background-color: rgb(49, 49, 49);
+  color: white;
+  border-radius: 5px;
+  border: 4px solid rgb(66, 66, 66);
+  margin: 2vh;
 }
 
 .output,
 .previousOutput {
-    margin: 1vh 3vh;
-    min-height: 1.5rem;
+  margin: 1vh 3vh;
+  min-height: 1.5rem;
 }
 
 .previousOutput {
-    font-size: medium;
+  font-size: medium;
 }
 
 .numPad,
 .deletion {
-    margin: 0rem;
-    padding: 2rem;
+  margin: 0rem;
+  padding: 2rem;
 }
 
 .numPad {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .deletion {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 button {
-    margin: 1vh;
-    padding: 1vh;
-    border-radius: 5px;
-    background-color: rgb(49, 49, 49);
-    color: white;
-    font-size: x-large;
-    border: 4px solid rgb(66, 66, 66);
+  margin: 1vh;
+  padding: 1vh;
+  border-radius: 5px;
+  background-color: rgb(49, 49, 49);
+  color: white;
+  font-size: x-large;
+  border: 4px solid rgb(66, 66, 66);
 }
 
-button:hover{
-    transform: scale(1.02);
-    cursor: pointer;
+button:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 .operator,
 .equals {
-    background-color: rgb(246, 153, 6);
+  background-color: rgb(246, 153, 6);
 }
 
 .clear {
-    background-color: rgb(170, 41, 67);
+  background-color: rgb(170, 41, 67);
 }
 .footer {
-    color: white;
-    align-items: end;
-    margin-top: auto;
+  color: white;
+  align-items: end;
+  margin-top: auto;
 }
