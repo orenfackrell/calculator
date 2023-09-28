@@ -19,7 +19,7 @@ export function division(a, b) {
 
 // 'BIDMAS' logic
 export function handleMultiplicationAndDivision(calculation) {
-  for (let i = 0; i < calculation.length; i = +1) {
+  for (let i = 0; i < calculation.length; i += 1) {
     if (calculation[i] === 'x' || calculation[i] === '÷') {
       const result =
         calculation[i] === 'x'
@@ -40,7 +40,7 @@ export function handleMultiplicationAndDivision(calculation) {
 }
 
 export function handleAdditionAndSubtraction(calculation) {
-  for (let i = 0; i < calculation.length; i = +1) {
+  for (let i = 0; i < calculation.length; i += 1) {
     if (calculation[i] === '+' || calculation[i] === '-') {
       const result =
         calculation[i] === '+'
