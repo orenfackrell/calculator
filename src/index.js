@@ -1,11 +1,11 @@
-import { addition, subtraction, multiplication, division } from './operations';
-import {
-  clearOutput,
-  appendNumber,
-  appendOperator,
-  removeLastCharacter,
-  appendDecimal,
-} from './display';
+// import { addition, subtraction, multiplication, division } from './operations';
+// import {
+//   clearOutput,
+//   appendNumber,
+//   appendOperator,
+//   removeLastCharacter,
+//   appendDecimal,
+// } from './display';
 
 import addEventListeners from './eventListeners';
 

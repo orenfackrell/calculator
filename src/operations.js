@@ -66,20 +66,20 @@ const previousOutput = document.querySelector('.previousOutput');
 export function operate() {
   let calculation = output.textContent.split(' ');
 
-  // Handle multiplication and division first
   calculation = handleMultiplicationAndDivision(calculation);
-
-  // Then handle addition and subtraction
   calculation = handleAdditionAndSubtraction(calculation);
 
   [output.textContent] = calculation;
+
+  return output.textContent;
 }
 
 export function calculate() {
   previousOutput.textContent = `${output.textContent} =`;
 
   const calculation = output.textContent.split(' ');
-  const result = operate(...calculation);
+  const result = parseFloat(operate(...calculation));
+  console.log({ calculation, result });
 
   const roundedResult = parseFloat(result.toFixed(10)).toString();
   output.textContent = roundedResult;
